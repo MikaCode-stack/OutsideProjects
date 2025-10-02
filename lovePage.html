@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Surprise</title>
+  <script src="https://unpkg.com/vue@2.7.8/dist/vue.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+    }
+    /* Container for the picture */
+    .pic-container {
+      margin: 40px auto;
+      padding: 20px;
+      width: 450px;
+      max-width: 90%;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+      text-align: center;
+    }
+
+    .pic-container img {
+      max-width: 100%;
+      border-radius: 10px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 18px;
+      margin: 20px;
+      cursor: pointer;
+      position: absolute;
+    }
+    #yesBtn {
+      padding: 15px 40px;
+      font-size: 22px;
+      font-weight: bold;
+      background: #ff4d6d;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: 0.3s ease;
+      position: relative; /* stays in place */
+    }
+    #noBtn {
+      background: red;
+      border-radius: 12px;
+      border: none;
+      font-weight: bold
+    }
+  </style>
+</head>
+
+<body>
+  <div id="lovePage">
+    <div v-if="page === 'greeting'">
+      <h1>{{ message }}</h1>
+      <p>Do you miss me? 💖</p>
+      <div class="pic-container">
+      <img src="https://i.pinimg.com/736x/5d/a3/36/5da336cafd45d0d5ea43c39430cc5d95--mort-madagascar-madagascar-movie.jpg?b=t" alt="Mort">
+      </div>
+      <button id="yesBtn" @click="sayYes">Yes</button>
+      <button id="noBtn" :style="noStyle" @mouseover="moveNo">No</button>
+    </div>
+
+    <div v-else-if="page === 'picture'">
+      <h1>Yaay! I knew it ❤️</h1>
+      <div class="pic-container">
+        <img src="https://thumbs.dreamstime.com/b/corgi-dog-rose-flower-mouth-valentine-s-day-card-vector-cartoon-cute-sitting-corgi-puppy-pink-background-funny-humorous-138120318.jpg?w=768" alt="Cute surprise">
+      </div>
+    </div>
+  </div>
+
+  <script>
+    new Vue({
+      el: '#lovePage',
+      data: {
+        message: 'Coucou, Tu dors!!? 😟😟😟',
+        page: 'greeting',
+        noStyle: {
+          left: '50%',
+          top: '60%'
+        }
+      },
+      methods: {
+        moveNo() {
+          const x = Math.random() * (window.innerWidth - 100);
+          const y = Math.random() * (window.innerHeight - 50);
+          this.noStyle = {
+            left: x + 'px',
+            top: y + 'px',
+            position: 'absolute'
+          };
+        },
+        sayYes() {
+          this.page = 'picture';
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>
